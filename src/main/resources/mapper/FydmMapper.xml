@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.taiji.collection.mapper.FydmMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.taiji.collection.entity.Fydm" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="fy_id" property="fyId" jdbcType="INTEGER" />
+    <result column="fy_fydm" property="fyFydm" jdbcType="VARCHAR" />
+    <result column="fy_fjm" property="fyFjm" jdbcType="VARCHAR" />
+    <result column="fy_p_fydm" property="fyPFydm" jdbcType="VARCHAR" />
+    <result column="fy_p_fjm" property="fyPFjm" jdbcType="VARCHAR" />
+    <result column="fy_fymc" property="fyFymc" jdbcType="VARCHAR" />
+    <result column="fy_fydz" property="fyFydz" jdbcType="VARCHAR" />
+    <result column="fy_qhjc" property="fyQhjc" jdbcType="VARCHAR" />
+    <result column="fy_fyjc" property="fyFyjc" jdbcType="VARCHAR" />
+    <result column="sxh" property="sxh" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>

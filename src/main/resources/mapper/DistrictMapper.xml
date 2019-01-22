@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.taiji.collection.mapper.DistrictMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.taiji.collection.entity.District" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="parent_city_name" property="parentCityName" jdbcType="VARCHAR" />
+    <result column="index_no" property="indexNo" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="is_stop" property="isStop" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>
