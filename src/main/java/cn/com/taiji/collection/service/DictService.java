@@ -17,4 +17,6 @@ public interface DictService {
     List<Fydm> findAllFydm();
 
     List<Ajlx> findAllAjlx();
+
+    List<Ay> getChirldAy(List<Ay> ayList);
 }
