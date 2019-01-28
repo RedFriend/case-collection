@@ -1,6 +1,7 @@
 package cn.com.taiji.collection.entity;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "common.t_ggk_ay")
@@ -106,6 +107,17 @@ public class Ay extends BaseEntity {
      * 是否有效，0表示无效，1表示有效
      */
     private Integer flag;
+
+    @Transient
+    private List<Ay> chirldAy;
+
+    public List<Ay> getChirldAy() {
+        return chirldAy;
+    }
+
+    public void setChirldAy(List<Ay> chirldAy) {
+        this.chirldAy = chirldAy;
+    }
 
     /**
      * @return id
