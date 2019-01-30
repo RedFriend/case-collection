@@ -34,6 +34,7 @@ public class Dsr extends BaseEntity {
     /**
      * 综合业务系统里当事人表ID
      */
+    @Column(name = "dsrid")
     private String dsrid;
 
     /**

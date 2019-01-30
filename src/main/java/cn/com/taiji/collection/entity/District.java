@@ -1,6 +1,7 @@
 package cn.com.taiji.collection.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "common.t_ggk_china_district")
 public class District extends BaseEntity {
@@ -44,6 +45,17 @@ public class District extends BaseEntity {
      */
     @Column(name = "is_stop")
     private Integer isStop;
+
+    @Transient
+    private List<District> childDistrict;
+
+    public List<District> getChildDistrict() {
+        return childDistrict;
+    }
+
+    public void setChildDistrict(List<District> childDistrict) {
+        this.childDistrict = childDistrict;
+    }
 
     /**
      * 获取行政区划代码

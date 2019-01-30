@@ -1,9 +1,6 @@
 package cn.com.taiji.collection.service;
 
-import cn.com.taiji.collection.entity.Ajlx;
-import cn.com.taiji.collection.entity.Ay;
-import cn.com.taiji.collection.entity.AyAjlx;
-import cn.com.taiji.collection.entity.Fydm;
+import cn.com.taiji.collection.entity.*;
 import cn.com.taiji.collection.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +22,12 @@ public class DictServiceImpl implements DictService {
 
     @Autowired
     AjlxMapper ajlxMapper;
+
+    @Autowired
+    DictMapper dictMapper;
+
+    @Autowired
+    DistrictMapper districtMapper;
 
     @Override
     public List<Ay> findAllAy() {
@@ -75,5 +78,39 @@ public class DictServiceImpl implements DictService {
             }
         }
         return ay;
+    }
+
+    @Override
+    public List<Dict> getSaly(String type,String code){
+        return dictMapper.selDictByTypeCode(type,code);
+    }
+
+    @Override
+    public List<District> getSzd(){
+        String parent_id="";
+        List<District> list=districtMapper.selDistrictCondiction(parent_id); //查询全国所有行政城市
+        //每个节点查找子节点
+        for(int i=0;i<list.size();i++){
+            District father=list.get(i);
+            for(int j=0;j<list.size();j++){
+                District district=list.get(j);
+                if(father.getId().equals(district.getParentId())){
+                    List<District> childList=father.getChildDistrict();
+                    if(childList==null){
+                        childList=new ArrayList<District>();
+                    }
+                    childList.add(district);
+                    father.setChildDistrict(childList);
+                }
+            }
+        }
+        //只返回一级节点
+        List<District> returnList=new ArrayList<District>();
+        for(District district:list){
+            if("000000".equals(district.getParentId())){
+                returnList.add(district);
+            }
+        }
+        return returnList;
     }
 }

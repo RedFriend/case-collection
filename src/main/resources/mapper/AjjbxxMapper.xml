@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.com.taiji.collection.mapper.AjjbxxMapper" >
+
+    <!--查询案件信息-->
+    <select id="selAjjbxxByCode" parameterType="java.lang.String" resultType="cn.com.taiji.collection.entity.Ajjbxx">
+        select * from t_jck_ajjbxx where code=#{code} limit 1
+    </select>
 </mapper>

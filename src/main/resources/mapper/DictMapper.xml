@@ -24,4 +24,17 @@
     <result column="column1" property="column1" jdbcType="VARCHAR" />
     <result column="column2" property="column2" jdbcType="VARCHAR" />
   </resultMap>
+
+  <!--条件查询字典表-->
+  <select id="selDictByTypeCode" parameterType="java.lang.String" resultType="cn.com.taiji.collection.entity.Dict">
+      SELECT * from t_ggk_dict where 1=1
+      <if test="type!= null and type != ''">
+        and type = #{type}
+      </if>
+      <if test="code!= null and code != ''">
+        and code= #{code}
+      </if>
+      order by order_by,length(value),value asc
+  </select>
+
 </mapper>
