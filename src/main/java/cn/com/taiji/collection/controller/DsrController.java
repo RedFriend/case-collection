@@ -4,6 +4,8 @@ import cn.com.taiji.collection.entity.Ajjbxx;
 import cn.com.taiji.collection.entity.Dsr;
 import cn.com.taiji.collection.service.DsrService;
 import cn.com.taiji.collection.util.RequestReflect;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
-
 @RestController
 @RequestMapping("/dsr")
 public class DsrController {
@@ -32,6 +33,8 @@ public class DsrController {
      *  新增：http://localhost:8080/dsr/addUpdDsr?code=222222&addOrUpd=add&clbh=1901111&dsrid=1
      *  修改：http://localhost:8080/dsr/addUpdDsr?code=222222&addOrUpd=upd&clbh=1901111&dsrId=48564710&dsrid=1
      */
+
+    @ApiOperation(value="立案 保存当事人信息")
     @GetMapping("/addUpdDsr")
     @Cacheable(value = "addUpdDsr")
     public Map<String,Object> addUpdDsr(HttpServletRequest request, HttpServletResponse response) {

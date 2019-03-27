@@ -1,8 +1,11 @@
 package cn.com.taiji.collection.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 import javax.persistence.*;
-
+@ApiModel(value = "案件基本信息实体",description = "案件基本信息数据库模型")
 @Table(name = "t_jck_ajjbxx")
 public class Ajjbxx extends BaseEntity {
     @Id
@@ -11,281 +14,340 @@ public class Ajjbxx extends BaseEntity {
     /**
      * 流水号
      */
+    @ApiModelProperty(value = "流水号")
     private String code;
 
     /**
      * 材料编号
      */
+    @ApiModelProperty(value = "材料编号")
     private String clbh;
 
     /**
      * 材料状态=1=以核对、0=未核对
      */
+    @ApiModelProperty(value = "材料状态=1=以核对、0=未核对")
     private String clzt;
 
     /**
      * 创建日期
      */
+    @ApiModelProperty(value = "创建日期")
     private String cjrq;
 
     /**
      * 承办法院
      */
+    @ApiModelProperty(value = "承办法院")
     private String cbfy;
 
     /**
      * 承办部门
      */
+    @ApiModelProperty(value = "承办部门")
     private String cbbm;
 
     /**
      * 案件来源
      */
+    @ApiModelProperty(value = "案件来源")
     private String ajly;
 
     /**
      * 诉讼标的
      */
+    @ApiModelProperty(value = "诉讼标的")
     private String ssbd;
 
     /**
      * 诉讼标的行为
      */
+    @ApiModelProperty(value = "诉讼标的行为")
     private String ssbdxw;
 
     /**
      * 诉讼标的物
      */
+    @ApiModelProperty(value = "诉讼标的物")
     private String ssbdw;
 
     /**
      * 适用程序 ：1简易 2 普通
      */
+    @ApiModelProperty(value = "适用程序 ：1简易 2 普通")
     private String sycx;
 
     /**
      * 案件类别
      */
+    @ApiModelProperty(value = "案件类别")
     private String ajlb;
 
     /**
      * 案件分类
      */
+    @ApiModelProperty(value = "案件分类")
     private String ajfl;
 
     /**
      * 字号
      */
+    @ApiModelProperty(value = "字号")
     private String zh;
 
     /**
      * 收到诉状日期
      */
+    @ApiModelProperty(value = "收到诉状日期")
     private String sdszrq;
 
     /**
      * 立案案由
      */
+    @ApiModelProperty(value = "立案案由")
     private String laay;
 
     /**
      * 是否繁案
      */
+    @ApiModelProperty(value = "是否繁案")
     private String sffa;
 
     /**
      * 案件状态
      */
+    @ApiModelProperty(value = "案件状态")
     private String ajzt;
 
     /**
      * 应缴诉讼费
      */
+    @ApiModelProperty(value = "应缴诉讼费")
     private String yjssf;
 
     /**
      * 刑事案件:公诉机关
      */
+    @ApiModelProperty(value = "刑事案件:公诉机关")
     private String gsjg;
 
     /**
      * 刑事案件:公诉书编号
      */
+    @ApiModelProperty(value = "刑事案件:公诉书编号")
     private String gssbh;
 
     /**
      * 刑事案件:公安机关
      */
+    @ApiModelProperty(value = "刑事案件:公安机关")
     private String gajg;
 
     /**
      * 收案法官
      */
+    @ApiModelProperty(value = "收案法官")
     private String safg;
 
     /**
      * 案由名称
      */
+    @ApiModelProperty(value = "案由名称")
     private String aymc;
 
     /**
      * 案件涉及
      */
+    @ApiModelProperty(value = "案件涉及")
     private String ajsj;
 
     /**
      * 是否大案
      */
+    @ApiModelProperty(value = "是否大案")
     private String sfda;
 
     /**
      * 大案成因
      */
+    @ApiModelProperty(value = "大案成因")
     private String dacy;
 
     /**
      * 是否要案
      */
+    @ApiModelProperty(value = "是否要案")
     private String sfya;
 
     /**
      * 要案成因
      */
+    @ApiModelProperty(value = "要案成因")
     private String yacy;
 
     /**
      * 收费类型
      */
+    @ApiModelProperty(value = "收费类型")
     private String sflx;
 
     /**
      * 适用审限
      */
+    @ApiModelProperty(value = "适用审限")
     private String sysx;
 
     /**
      * 适用审限
      */
+    @ApiModelProperty(value = "适用审限")
     private String spcx;
 
     /**
      * 立案管辖依据
      */
+    @ApiModelProperty(value = "立案管辖依据")
     private String lagxyj;
 
     /**
      * 立案案由 （主体类型）
      */
+    @ApiModelProperty(value = "立案案由 （主体类型）")
     @Column(name = "laay_ztlx")
     private String laayZtlx;
 
     /**
      * 立案案由（行政行为种类）
      */
+    @ApiModelProperty(value = "立案案由（行政行为种类）")
     @Column(name = "laay_xzxwzl")
     private String laayXzxwzl;
 
     /**
      * 行政行为
      */
+    @ApiModelProperty(value = "行政行为")
     private String xzxw;
 
     /**
      * 提起行政赔偿方式
      */
+    @ApiModelProperty(value = "提起行政赔偿方式")
     private String tqpcfs;
 
     /**
      * 受理程序
      */
+    @ApiModelProperty(value = "")
     private String slcx;
 
     /**
      * 赔偿案件类型
      */
+    @ApiModelProperty(value = "赔偿案件类型")
     private String pcajlx;
 
     /**
      * 请求赔偿对象
      */
+    @ApiModelProperty(value = "请求赔偿对象")
     private String qqpcdx;
 
     /**
      * 确认案件类别
      */
+    @ApiModelProperty(value = "确认案件类别")
     private String pcfs;
 
     /**
      * 赔偿审判依据
      */
+    @ApiModelProperty(value = "赔偿审判依据")
     private String pcspcx;
 
     /**
      * 报请案件案由
      */
+    @ApiModelProperty(value = "报请案件案由")
     @Column(name = "laay_bqajay")
     private String laayBqajay;
 
     /**
      * 公诉人
      */
+    @ApiModelProperty(value = "公诉人")
     private String gsr1;
 
     /**
      * 案件类型
      */
+    @ApiModelProperty(value = "案件类型")
     private String ajlx;
 
     /**
      * 收案法官姓名
      */
+    @ApiModelProperty(value = "收案法官姓名")
     private String safgxm;
 
     /**
      * 核对人
      */
+    @ApiModelProperty(value = "核对人")
     private String hdr;
 
     /**
      * 核对时间
      */
+    @ApiModelProperty(value = "核对时间")
     private String hdsj;
 
     /**
      * 分级码
      */
+    @ApiModelProperty(value = "分级码")
     private String fjm;
 
+    @ApiModelProperty(value = "")
     @Column(name = "HY_SASJ")
     private String hySasj;
 
+    @ApiModelProperty(value = "")
     @Column(name = "HY_LASJ")
     private String hyLasj;
 
+    @ApiModelProperty(value = "")
     @Column(name = "HY_SXRQ")
     private String hySxrq;
 
+    @ApiModelProperty(value = "")
     @Column(name = "HY_YWLX")
     private String hyYwlx;
 
+    @ApiModelProperty(value = "来源")
     private String source;
 
+    @ApiModelProperty(value = "优先级")
     private Integer level;
 
+    @ApiModelProperty(value = "创建时间")
     @Column(name = "create_time")
     private Date createTime;
 
+    @ApiModelProperty(value = "更新时间")
     @Column(name = "update_time")
     private Date updateTime;
 
     /**
      * 诉讼请求
      */
+    @ApiModelProperty(value = "讼请求")
     private String ssqq;
 
     /**
      * 事实与理由
      */
+    @ApiModelProperty(value = "事实与理由")
     private String ssyly;
 
     /**
