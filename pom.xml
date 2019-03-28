@@ -17,7 +17,27 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>nexus</name>
+            <url>http://193.112.124.245:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
 
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://193.112.124.245:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://193.112.124.245:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -139,6 +159,19 @@
             <version>2.6.1</version>
         </dependency>
 
+
+        <!--dubbo同步案件接口 start-->
+        <dependency>
+            <artifactId>boss-remote</artifactId>
+            <groupId>com.taiji</groupId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <artifactId>case-online-remote</artifactId>
+            <groupId>com.taiji</groupId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+        <!--dubbo同步案件接口 end-->
     </dependencies>
 
     <build>

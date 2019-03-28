@@ -20,4 +20,6 @@ public interface DictService {
     List<Dict> getSaly(String type,String code);
 
     List<District> getSzd();
+
+    List<Ajdw> getAjdw(Ajdw ajdw);
 }

@@ -3,6 +3,7 @@ package cn.com.taiji.collection.controller;
 import cn.com.taiji.collection.entity.Ajjbxx;
 import cn.com.taiji.collection.service.CaseService;
 import cn.com.taiji.collection.util.RequestReflect;
+import com.taiji.caze.online.remote.vo.data.ElCaseInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class CaseController extends BaseController {
 
     @Autowired
     CaseService caseService;
+
+    @Autowired
+    com.taiji.caze.online.remote.service.CaseService caseOnlineService;
 
     /**
      * 立案 保存案件信息
@@ -53,5 +57,9 @@ public class CaseController extends BaseController {
         return map;
     }
 
-
+public void test(){
+    ElCaseInfo elCaseInfo=new ElCaseInfo();
+//    elCaseInfo.setCaseData();
+//    caseOnlineService.collectCase()
+}
 }

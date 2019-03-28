@@ -29,6 +29,9 @@ public class DictServiceImpl implements DictService {
     @Autowired
     DistrictMapper districtMapper;
 
+    @Autowired
+    AjdwMapper ajdwMapper;
+
     @Override
     public List<Ay> findAllAy() {
         return ayMapper.selectAll();
@@ -112,5 +115,10 @@ public class DictServiceImpl implements DictService {
             }
         }
         return returnList;
+    }
+
+    @Override
+    public List<Ajdw> getAjdw(Ajdw ajdw) {
+       return ajdwMapper.select(ajdw);
     }
 }

@@ -54,7 +54,7 @@
         <!--<table tableName="t_ws_dict" domainObjectName="WsDict" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>-->
-        <table tableName="t_ggk_ajlx" domainObjectName="Ajlx" enableCountByExample="false"
+        <table tableName="t_ggk_ajdw" domainObjectName="Ajdw" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>

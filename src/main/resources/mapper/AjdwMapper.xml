@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.taiji.collection.mapper.AjdwMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.taiji.collection.entity.Ajdw" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="enable_flag" property="enableFlag" jdbcType="INTEGER" />
+    <result column="ajlx" property="ajlx" jdbcType="VARCHAR" />
+    <result column="ajlx_name" property="ajlxName" jdbcType="VARCHAR" />
+    <result column="ssdw" property="ssdw" jdbcType="VARCHAR" />
+    <result column="ssdw_name" property="ssdwName" jdbcType="VARCHAR" />
+    <result column="convert_ssdw" property="convertSsdw" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>
