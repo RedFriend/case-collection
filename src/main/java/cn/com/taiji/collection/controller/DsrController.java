@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 @RestController
 @RequestMapping("/dsr")
@@ -60,5 +62,43 @@ public class DsrController {
         return map;
     }
 
+    @ApiOperation(value="查询当事人信息")
+    @GetMapping("/selectDsr")
+    @Cacheable(value = "selectDsr")
+    @ResponseBody
+    public Map<String,Object> selectDsr(HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8085");
+        Map<String, Object> map = new HashMap<>();
+        try{
+            String code = request.getParameter("code");
+            map = dsrService.selectDsr(code);
+        }catch(Exception e){
+            e.printStackTrace();
+            map.put("code","false");
+            map.put("msg","查询异常");
+            map.put("returnStr",e.toString());
+        }
+        return map;
+    }
+
+    @ApiOperation(value="删除当事人信息")
+    @GetMapping("/delDsr")
+    @Cacheable(value = "delDsr")
+    @ResponseBody
+    public Map<String,Object> delDsr(HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8085");
+        Map<String, Object> map = new HashMap<>();
+        try{
+            String code = request.getParameter("code");
+            int dsrId = Integer.valueOf(request.getParameter("dsrId"));
+            map = dsrService.delDsr(code,dsrId);
+        }catch(Exception e){
+            e.printStackTrace();
+            map.put("code","false");
+            map.put("msg","程序异常");
+            map.put("returnStr",e.toString());
+        }
+        return map;
+    }
 
 }

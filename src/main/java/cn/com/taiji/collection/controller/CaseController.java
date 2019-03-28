@@ -57,6 +57,25 @@ public class CaseController extends BaseController {
         return map;
     }
 
+    @ApiOperation(value="查询案件信息")
+    @PostMapping("/selectCase")
+    @Cacheable(value = "selectCase")
+    @ResponseBody
+    public Map<String, Object> selectCase(Ajjbxx ajjbxx, HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8085");
+        Map<String, Object> map = new HashMap<>();
+        try {
+            map = caseService.selectCase(ajjbxx,request);
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (map.get("returnStr") == null) {
+                map.put("code", "false");
+                map.put("returnStr", e.toString());
+            }
+        }
+        return map;
+    }
+
 public void test(){
     ElCaseInfo elCaseInfo=new ElCaseInfo();
 //    elCaseInfo.setCaseData();

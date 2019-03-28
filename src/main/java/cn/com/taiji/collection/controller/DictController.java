@@ -147,7 +147,7 @@ public class DictController extends BaseController {
     @Cacheable(value = "mz")
     public List<Dict> mz() {
         String code="gb_mz";
-        String type="1";
+        String type="36";
         return dictService.getSaly(type,code);
     }
 

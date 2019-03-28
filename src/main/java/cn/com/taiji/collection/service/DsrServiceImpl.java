@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -74,6 +75,44 @@ public class DsrServiceImpl implements DsrService{
         dsrMapper.updateByPrimaryKey(dsr);
         map.put("code","true");
         map.put("returnStr","修改成功");
+        return map;
+    }
+
+    @Override
+    public Map<String,Object> selectDsr(String code) {
+        Map<String,Object> map = new HashMap<>();
+        if(null == code || "".equals(code)){
+            map.put("code","false");
+            map.put("returnStr","参数不能为空");
+            return map;
+        }
+        Dsr dsr = new Dsr();
+        dsr.setCode(code);
+        List<Dsr> dsrs = dsrMapper.select(dsr);
+        map.put("code","true");
+        map.put("data",dsrs);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> delDsr(String code, int dsrId) {
+        Map<String,Object> map = new HashMap<>();
+        if(null == code || "".equals(code)){
+            map.put("code","false");
+            map.put("msg","参数不能为空");
+            return map;
+        }
+        Dsr dsr = new Dsr();
+        dsr.setCode(code);
+        dsr.setDsrId(dsrId);
+        int delNum = dsrMapper.delete(dsr);
+        if(delNum < 1){
+            map.put("code","false");
+            map.put("msg","删除失败");
+        }else{
+            map.put("code","true");
+            map.put("msg","删除成功");
+        }
         return map;
     }
 }
