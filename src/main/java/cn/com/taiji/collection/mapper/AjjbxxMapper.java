@@ -7,4 +7,8 @@ import org.apache.ibatis.annotations.Param;
 public interface AjjbxxMapper extends BaseMapper<Ajjbxx> {
 
     public Ajjbxx selAjjbxxByCode(@Param("code")String code);
+
+    public String getStandCode(@Param("fydm") String fydm);
+
+    public String findFydmByFjm(@Param("fjm") String fjm);
 }

@@ -31,9 +31,12 @@ public class CaseServiceImpl implements CaseService{
 
         //添加
         ajjbxx.setId(null);
+        String fydm = ajjbxxMapper.findFydmByFjm(ajjbxx.getFjm());
+        ajjbxx.setCode(ajjbxxMapper.getStandCode(fydm));
         ajjbxxMapper.insert(ajjbxx);
         map.put("code","true");
         map.put("returnStr","添加成功");
+        map.put("data",ajjbxx);
         return map;
     }
 
