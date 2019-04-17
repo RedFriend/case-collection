@@ -1,18 +1,18 @@
 package cn.com.taiji.collection.service;
 
-import cn.com.taiji.collection.entity.Dsr;
+import cn.com.taiji.collection.entity.vo.DsrVo;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 public interface DsrService {
 
-    public Map<String,Object> addDsr(HttpServletRequest request,Dsr dsr);
+    List<DsrVo> findDsrs(String code);
 
-    public Map<String,Object> updDsr(HttpServletRequest request,Dsr dsr);
+    Integer addDsr(DsrVo dsr);
 
-    public Map<String,Object> selectDsr(String code);
+    Integer deleleteDsr(Integer id);
 
-    public Map<String,Object> delDsr(String code,int dsrId);
+    Integer updateDsr(DsrVo dsr);
+
+    DsrVo selectDsr(Integer id);
 }

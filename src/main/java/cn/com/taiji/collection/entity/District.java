@@ -1,5 +1,8 @@
 package cn.com.taiji.collection.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -47,6 +50,7 @@ public class District extends BaseEntity {
     private Integer isStop;
 
     @Transient
+    @JsonProperty(value = "children")
     private List<District> childDistrict;
 
     public List<District> getChildDistrict() {

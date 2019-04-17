@@ -13,7 +13,7 @@
         </plugin>
         <!-- 数据库的相关配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://146.12.2.229:3306/common"
+                        connectionURL="jdbc:mysql://146.12.2.229:3306/cs_dzjz_20180608"
                         userId="root"
                         password="123.com"/>
         <!-- 实体类生成的位置 -->
@@ -54,7 +54,7 @@
         <!--<table tableName="t_ws_dict" domainObjectName="WsDict" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>-->
-        <table tableName="t_ggk_ajdw" domainObjectName="Ajdw" enableCountByExample="false"
+        <table tableName="t_jck_bhr" domainObjectName="Bhr" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>

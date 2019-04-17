@@ -7,9 +7,9 @@ import java.util.Map;
 
 public interface CaseService {
 
-    public Map<String,Object> addAjjbxx(Ajjbxx ajjbxx,HttpServletRequest request);
+    public Map<String,Object> addAjjbxx(Ajjbxx ajjbxx);
 
-    public Map<String,Object> updAjjbxx(Ajjbxx ajjbxx,HttpServletRequest request);
+    public Map<String,Object> updAjjbxx(Ajjbxx ajjbxx);
 
-    public Map<String,Object> selectCase(Ajjbxx ajjbxx,HttpServletRequest request);
+    public Map<String,Object> selectCase(Ajjbxx ajjbxx);
 }

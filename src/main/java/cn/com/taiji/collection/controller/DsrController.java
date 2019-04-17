@@ -1,25 +1,23 @@
 package cn.com.taiji.collection.controller;
 
-import cn.com.taiji.collection.entity.Ajjbxx;
-import cn.com.taiji.collection.entity.Dsr;
+import cn.com.taiji.collection.entity.vo.CaseDsrVo;
+import cn.com.taiji.collection.entity.vo.DsrVo;
 import cn.com.taiji.collection.service.DsrService;
-import cn.com.taiji.collection.util.RequestReflect;
-import io.swagger.annotations.Api;
+import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping("/dsr")
+@CrossOrigin(origins = "*")
+@Slf4j
 public class DsrController {
 
     @Autowired
@@ -27,78 +25,69 @@ public class DsrController {
 
     /**
      * 立案 保存当事人信息
-     * @param request
-     * @param response
-     * @return
      *
-     * 测试
-     *  新增：http://localhost:8080/dsr/addUpdDsr?code=222222&addOrUpd=add&clbh=1901111&dsrid=1
-     *  修改：http://localhost:8080/dsr/addUpdDsr?code=222222&addOrUpd=upd&clbh=1901111&dsrId=48564710&dsrid=1
+     * @param caseDsrVo
+     * @return 测试
      */
 
-    @ApiOperation(value="立案 保存当事人信息")
-    @GetMapping("/addUpdDsr")
-    @Cacheable(value = "addUpdDsr")
-    public Map<String,Object> addUpdDsr(HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8085");
-        Map<String, Object> map = new HashMap<>();
-        try{
-            String addOrUpd=request.getParameter("addOrUpd");
-            RequestReflect reflect=new RequestReflect();
-            Dsr dsr=reflect.reflects(request,Dsr.class);//转换为对象
-            if("add".equals(addOrUpd)){
-                map=dsrService.addDsr(request,dsr);
-            }else if("upd".equals(addOrUpd)){
-                map=dsrService.updDsr(request,dsr);
-            }
+    @ApiOperation(value = "立案 新增或保存当事人信息")
+    @PostMapping("/addUpdDsr")
+    public Map addUpdDsr(@RequestBody CaseDsrVo caseDsrVo) {
+        System.out.println(JSON.toJSONString(caseDsrVo));
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("code", "false");
+        map.put("returnStr", "保存失败");
+        try {
 
-        }catch(Exception e){
-            e.printStackTrace();
-            if(map.get("returnStr")==null){
-                map.put("code","false");
-                map.put("returnStr",e.toString());
+            for (DsrVo dsrVo : caseDsrVo.getDsrVos()) {
+                if (StringUtils.isEmpty(dsrVo.getId())) {
+                    dsrService.addDsr(dsrVo);
+                } else {
+                    dsrService.updateDsr(dsrVo);
+                }
             }
+            map.put("code", "true");
+            map.put("returnStr", "保存成功");
+        } catch (Exception e) {
+            log.error("保存当事人出现异常", e);
         }
         return map;
     }
 
-    @ApiOperation(value="查询当事人信息")
+    @ApiOperation(value = "查询当事人信息")
     @GetMapping("/selectDsr")
-    @Cacheable(value = "selectDsr")
     @ResponseBody
-    public Map<String,Object> selectDsr(HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8085");
-        Map<String, Object> map = new HashMap<>();
-        try{
-            String code = request.getParameter("code");
-            map = dsrService.selectDsr(code);
-        }catch(Exception e){
-            e.printStackTrace();
-            map.put("code","false");
-            map.put("msg","查询异常");
-            map.put("returnStr",e.toString());
+    public DsrVo selectDsr(Integer id) {
+        return dsrService.selectDsr(id);
+    }
+
+    @ApiOperation(value = "查询案件所有当事人信息")
+    @GetMapping("/findDsrs")
+    @ResponseBody
+    public List<DsrVo> findDsrs(String code) {
+        return dsrService.findDsrs(code);
+    }
+
+    @ApiOperation(value = "删除当事人信息")
+    @PostMapping("/delDsr")
+    @ResponseBody
+    public Map<String, Object> delDsr(Integer id) {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("code", "false");
+        map.put("returnStr", "保存失败");
+        try {
+            int flg = dsrService.deleleteDsr(id);
+            if (flg > 0) {
+                map.put("code", "true");
+                map.put("returnStr", "保存成功");
+            }
+        } catch (Exception e) {
+            log.error("删除当事人出现异常", e);
+            map.put("code", "false");
+            map.put("msg", "删除失败");
         }
         return map;
     }
 
-    @ApiOperation(value="删除当事人信息")
-    @GetMapping("/delDsr")
-    @Cacheable(value = "delDsr")
-    @ResponseBody
-    public Map<String,Object> delDsr(HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8085");
-        Map<String, Object> map = new HashMap<>();
-        try{
-            String code = request.getParameter("code");
-            int dsrId = Integer.valueOf(request.getParameter("dsrId"));
-            map = dsrService.delDsr(code,dsrId);
-        }catch(Exception e){
-            e.printStackTrace();
-            map.put("code","false");
-            map.put("msg","程序异常");
-            map.put("returnStr",e.toString());
-        }
-        return map;
-    }
 
 }

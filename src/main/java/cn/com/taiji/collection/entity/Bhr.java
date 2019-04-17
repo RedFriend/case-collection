@@ -48,7 +48,7 @@ public class Bhr extends BaseEntity {
     private String sf;
 
     /**
-     * 证件总类
+     * 证件类型
      */
     private String zjzl;
 
@@ -112,6 +112,36 @@ public class Bhr extends BaseEntity {
      * 数据来源
      */
     private String source;
+
+    /**
+     * 与当事人关系
+     */
+    private String ydsrgx;
+
+    /**
+     * 诉讼代理人身份
+     */
+    private String ssdlrsf;
+
+    /**
+     * 是否法律援助
+     */
+    private String sfflyz;
+
+    /**
+     * 代理人邮编
+     */
+    private String yb;
+
+    /**
+     * 代理人单位注册地
+     */
+    private String dwzcd;
+
+    /**
+     * 代理人单位地址
+     */
+    private String dwdz;
 
     /**
      * @return id
@@ -272,18 +302,18 @@ public class Bhr extends BaseEntity {
     }
 
     /**
-     * 获取证件总类
+     * 获取证件类型
      *
-     * @return zjzl - 证件总类
+     * @return zjzl - 证件类型
      */
     public String getZjzl() {
         return zjzl;
     }
 
     /**
-     * 设置证件总类
+     * 设置证件类型
      *
-     * @param zjzl 证件总类
+     * @param zjzl 证件类型
      */
     public void setZjzl(String zjzl) {
         this.zjzl = zjzl == null ? null : zjzl.trim();
@@ -503,5 +533,113 @@ public class Bhr extends BaseEntity {
      */
     public void setSource(String source) {
         this.source = source == null ? null : source.trim();
+    }
+
+    /**
+     * 获取与当事人关系
+     *
+     * @return ydsrgx - 与当事人关系
+     */
+    public String getYdsrgx() {
+        return ydsrgx;
+    }
+
+    /**
+     * 设置与当事人关系
+     *
+     * @param ydsrgx 与当事人关系
+     */
+    public void setYdsrgx(String ydsrgx) {
+        this.ydsrgx = ydsrgx == null ? null : ydsrgx.trim();
+    }
+
+    /**
+     * 获取诉讼代理人身份
+     *
+     * @return ssdlrsf - 诉讼代理人身份
+     */
+    public String getSsdlrsf() {
+        return ssdlrsf;
+    }
+
+    /**
+     * 设置诉讼代理人身份
+     *
+     * @param ssdlrsf 诉讼代理人身份
+     */
+    public void setSsdlrsf(String ssdlrsf) {
+        this.ssdlrsf = ssdlrsf == null ? null : ssdlrsf.trim();
+    }
+
+    /**
+     * 获取是否法律援助
+     *
+     * @return sfflyz - 是否法律援助
+     */
+    public String getSfflyz() {
+        return sfflyz;
+    }
+
+    /**
+     * 设置是否法律援助
+     *
+     * @param sfflyz 是否法律援助
+     */
+    public void setSfflyz(String sfflyz) {
+        this.sfflyz = sfflyz == null ? null : sfflyz.trim();
+    }
+
+    /**
+     * 获取代理人邮编
+     *
+     * @return yb - 代理人邮编
+     */
+    public String getYb() {
+        return yb;
+    }
+
+    /**
+     * 设置代理人邮编
+     *
+     * @param yb 代理人邮编
+     */
+    public void setYb(String yb) {
+        this.yb = yb == null ? null : yb.trim();
+    }
+
+    /**
+     * 获取代理人单位注册地
+     *
+     * @return dwzcd - 代理人单位注册地
+     */
+    public String getDwzcd() {
+        return dwzcd;
+    }
+
+    /**
+     * 设置代理人单位注册地
+     *
+     * @param dwzcd 代理人单位注册地
+     */
+    public void setDwzcd(String dwzcd) {
+        this.dwzcd = dwzcd == null ? null : dwzcd.trim();
+    }
+
+    /**
+     * 获取代理人单位地址
+     *
+     * @return dwdz - 代理人单位地址
+     */
+    public String getDwdz() {
+        return dwdz;
+    }
+
+    /**
+     * 设置代理人单位地址
+     *
+     * @param dwdz 代理人单位地址
+     */
+    public void setDwdz(String dwdz) {
+        this.dwdz = dwdz == null ? null : dwdz.trim();
     }
 }

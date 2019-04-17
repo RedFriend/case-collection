@@ -1,4 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.taiji.collection.mapper.BhrMapper" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.taiji.collection.mapper.BhrMapper">
+  <resultMap id="BaseResultMap" type="cn.com.taiji.collection.entity.Bhr">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="bhrid" jdbcType="VARCHAR" property="bhrid" />
+    <result column="ajid" jdbcType="VARCHAR" property="ajid" />
+    <result column="dsrid" jdbcType="VARCHAR" property="dsrid" />
+    <result column="xm" jdbcType="VARCHAR" property="xm" />
+    <result column="lx" jdbcType="VARCHAR" property="lx" />
+    <result column="dw" jdbcType="VARCHAR" property="dw" />
+    <result column="zw" jdbcType="VARCHAR" property="zw" />
+    <result column="sf" jdbcType="VARCHAR" property="sf" />
+    <result column="zjzl" jdbcType="VARCHAR" property="zjzl" />
+    <result column="zjhm" jdbcType="VARCHAR" property="zjhm" />
+    <result column="lxff" jdbcType="VARCHAR" property="lxff" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="clbh" jdbcType="VARCHAR" property="clbh" />
+    <result column="clzt" jdbcType="VARCHAR" property="clzt" />
+    <result column="cjrq" jdbcType="VARCHAR" property="cjrq" />
+    <result column="hdr" jdbcType="VARCHAR" property="hdr" />
+    <result column="hdsj" jdbcType="VARCHAR" property="hdsj" />
+    <result column="fjm" jdbcType="VARCHAR" property="fjm" />
+    <result column="dsr_id" jdbcType="INTEGER" property="dsrId" />
+    <result column="sfzhm" jdbcType="VARCHAR" property="sfzhm" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="ydsrgx" jdbcType="VARCHAR" property="ydsrgx" />
+    <result column="ssdlrsf" jdbcType="VARCHAR" property="ssdlrsf" />
+    <result column="sfflyz" jdbcType="VARCHAR" property="sfflyz" />
+    <result column="yb" jdbcType="VARCHAR" property="yb" />
+    <result column="dwzcd" jdbcType="VARCHAR" property="dwzcd" />
+    <result column="dwdz" jdbcType="VARCHAR" property="dwdz" />
+  </resultMap>
 </mapper>

@@ -3,7 +3,7 @@ package cn.com.taiji.collection.entity;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "t_ggk_ajdw")
+@Table(name = "common.t_ggk_ajdw")
 public class Ajdw extends BaseEntity {
     /**
      * 主键

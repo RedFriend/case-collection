@@ -1,11 +1,14 @@
 package cn.com.taiji.collection.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "common.t_ggk_ay")
 public class Ay extends BaseEntity {
+    private static final long serialVersionUID =1838992440228475771L;
     @Id
     private Integer id;
 
@@ -109,6 +112,7 @@ public class Ay extends BaseEntity {
     private Integer flag;
 
     @Transient
+    @JsonProperty(value = "children")
     private List<Ay> chirldAy;
 
     public List<Ay> getChirldAy() {

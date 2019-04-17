@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/case")
+@CrossOrigin(origins = "*")
 public class CaseController extends BaseController {
 
     @Autowired
@@ -28,24 +30,20 @@ public class CaseController extends BaseController {
     /**
      * 立案 保存案件信息
      *
-     * @param request
-     * @param response
+     * @param ajjbxx
      * @return 测试:
      * 新增：http://localhost:8080/case/addUpdCase?code=222222&addOrUpd=add
      * 修改：http://localhost:8080/case/addUpdCase?code=222222&addOrUpd=upd&id=145048
      */
     @PostMapping("/addUpdCase")
-    @Cacheable(value = "addUpdCase")
     @ResponseBody
-    public Map<String, Object> addUpdCase(Ajjbxx ajjbxx, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8085");
+    public Map<String, Object> addUpdCase(@RequestBody Ajjbxx ajjbxx) {
         Map<String, Object> map = new HashMap<>();
         try {
-            String addOrUpd = request.getParameter("addOrUpd");
-            if ("add".equals(addOrUpd)) {
-                map = caseService.addAjjbxx(ajjbxx, request);
-            } else if ("upd".equals(addOrUpd)) {
-                map = caseService.updAjjbxx(ajjbxx, request);
+            if (StringUtils.isEmpty(ajjbxx.getId())) {
+                map = caseService.addAjjbxx(ajjbxx);
+            } else {
+                map = caseService.updAjjbxx(ajjbxx);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,15 +55,13 @@ public class CaseController extends BaseController {
         return map;
     }
 
-    @ApiOperation(value="查询案件信息")
-    @PostMapping("/selectCase")
-    @Cacheable(value = "selectCase")
+    @ApiOperation(value = "查询案件信息")
+    @GetMapping("/selectCase")
     @ResponseBody
-    public Map<String, Object> selectCase(Ajjbxx ajjbxx, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8085");
+    public Map<String, Object> selectCase(@RequestBody Ajjbxx ajjbxx) {
         Map<String, Object> map = new HashMap<>();
         try {
-            map = caseService.selectCase(ajjbxx,request);
+            map = caseService.selectCase(ajjbxx);
         } catch (Exception e) {
             e.printStackTrace();
             if (map.get("returnStr") == null) {
@@ -76,9 +72,11 @@ public class CaseController extends BaseController {
         return map;
     }
 
-public void test(){
-    ElCaseInfo elCaseInfo=new ElCaseInfo();
-//    elCaseInfo.setCaseData();
-//    caseOnlineService.collectCase()
-}
+
+    @ApiOperation(value = "调用收案接口")
+    @GetMapping("/collectionCase")
+    @ResponseBody
+    public Map<String, Object> collectionCase(@RequestBody Ajjbxx ajjbxx) {
+        return null;
+    }
 }
