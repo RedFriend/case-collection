@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.taiji:case-online-remote:1.1-SNAPSHOT">
     <CLASSES>
-      <root url="jar://D:/Program Files/apache-maven-3.5.3/repository/com/taiji/case-online-remote/1.1-SNAPSHOT/case-online-remote-1.1-20190402.123412-50.jar!/" />
+      <root url="jar://D:/Program Files/apache-maven-3.5.3/repository/com/taiji/case-online-remote/1.1-SNAPSHOT/case-online-remote-1.1-20190410.012827-53.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://D:/Program Files/apache-maven-3.5.3/repository/com/taiji/case-online-remote/1.1-SNAPSHOT/case-online-remote-1.1-20190402.123412-50-javadoc.jar!/" />
+      <root url="jar://D:/Program Files/apache-maven-3.5.3/repository/com/taiji/case-online-remote/1.1-SNAPSHOT/case-online-remote-1.1-20190410.012827-53-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://D:/Program Files/apache-maven-3.5.3/repository/com/taiji/case-online-remote/1.1-SNAPSHOT/case-online-remote-1.1-20190402.123412-50-sources.jar!/" />
+      <root url="jar://D:/Program Files/apache-maven-3.5.3/repository/com/taiji/case-online-remote/1.1-SNAPSHOT/case-online-remote-1.1-20190410.012827-53-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
