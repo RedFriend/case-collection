@@ -7,6 +7,7 @@ import cn.com.taiji.collection.entity.vo.DsrVo;
 import cn.com.taiji.collection.mapper.AjjbxxMapper;
 import cn.com.taiji.collection.mapper.BhrMapper;
 import cn.com.taiji.collection.mapper.DsrMapper;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -49,15 +50,17 @@ public class DsrServiceImpl implements DsrService {
 
     @Override
     public Integer addDsr(DsrVo dsrVo) {
-        int dsrId = dsrMapper.insert(convertToDsr(dsrVo));
+        Dsr dsr=convertToDsr(dsrVo);
+        JSON.toJSONString(dsr);
+        int rs= dsrMapper.insertUseGeneratedKeys(dsr);
         List<BhrVo> bhrVos = dsrVo.getBhrVos();
         for (BhrVo bhrVo : bhrVos) {
             Bhr bhr = convertToBhr(bhrVo);
-            bhr.setDsrId(dsrId);
+            bhr.setDsrId(dsr.getDsrId());
             bhr.setSource("cc");
             bhrMapper.insert(bhr);
         }
-        return dsrMapper.insert(convertToDsr(dsrVo));
+        return rs;
     }
 
     @Override

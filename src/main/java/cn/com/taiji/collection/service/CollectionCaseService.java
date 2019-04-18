@@ -1,9 +1,14 @@
 package cn.com.taiji.collection.service;
 
 
-import com.taiji.caze.online.remote.vo.data.ElCaseInfo;
-import com.taiji.caze.online.remote.vo.data.ResultInfo;
+import cn.com.taiji.collection.entity.vo.CaseDsrVo;
 
+import java.util.Map;
+
+/**
+ * @author penghongyou
+ */
 public interface CollectionCaseService {
 
+    Map pushCase(CaseDsrVo caseDsrVo);
 }

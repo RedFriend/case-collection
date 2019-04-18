@@ -2,6 +2,7 @@ package cn.com.taiji.collection.controller;
 
 import cn.com.taiji.collection.entity.Ajjbxx;
 import cn.com.taiji.collection.service.CaseService;
+import cn.com.taiji.collection.service.CollectionCaseService;
 import cn.com.taiji.collection.util.RequestReflect;
 import com.taiji.caze.online.remote.vo.data.ElCaseInfo;
 import io.swagger.annotations.Api;
@@ -25,7 +26,7 @@ public class CaseController extends BaseController {
     CaseService caseService;
 
     @Autowired
-    com.taiji.caze.online.remote.service.CaseService caseOnlineService;
+    CollectionCaseService collectionCaseService;
 
     /**
      * 立案 保存案件信息
@@ -39,6 +40,11 @@ public class CaseController extends BaseController {
     @ResponseBody
     public Map<String, Object> addUpdCase(@RequestBody Ajjbxx ajjbxx) {
         Map<String, Object> map = new HashMap<>();
+        if (StringUtils.isEmpty(ajjbxx.getCbfy())) {
+            map.put("code", "false");
+            map.put("returnStr", "参数cbfy不能为空");
+            return map;
+        }
         try {
             if (StringUtils.isEmpty(ajjbxx.getId())) {
                 map = caseService.addAjjbxx(ajjbxx);
@@ -77,6 +83,7 @@ public class CaseController extends BaseController {
     @GetMapping("/collectionCase")
     @ResponseBody
     public Map<String, Object> collectionCase(@RequestBody Ajjbxx ajjbxx) {
+
         return null;
     }
 }

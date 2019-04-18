@@ -26,6 +26,7 @@ package cn.com.taiji.collection.util;
 
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;
+import tk.mybatis.mapper.common.special.InsertUseGeneratedKeysMapper;
 
 /**
  * 继承自己的MyMapper
