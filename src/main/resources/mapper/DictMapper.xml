@@ -4,7 +4,7 @@
 
   <!--条件查询字典表-->
   <select id="selDictByTypeCode" parameterType="java.lang.String" resultType="cn.com.taiji.collection.entity.Dict">
-      SELECT type,name,code,value from t_ggk_dict where 1=1
+      SELECT type,name,code,value from common.t_ggk_dict where 1=1
       <if test="type!= null and type != ''">
         and type = #{type}
       </if>

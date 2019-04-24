@@ -82,6 +82,7 @@ public class DsrServiceImpl implements DsrService {
         bhrMapper.delete(bhr);
         List<BhrVo> bhrvos = dsrVo.getBhrVos();
         for (BhrVo bhrvo : bhrvos) {
+            bhrvo.setDsrId(dsrVo.getId());
             bhrMapper.insert(convertToBhr(bhrvo));
         }
         return dsrMapper.updateByPrimaryKey(convertToDsr(dsrVo));
@@ -144,7 +145,7 @@ public class DsrServiceImpl implements DsrService {
 
     private DsrVo convertToDsrVo(Dsr dsr) {
         DsrVo dsrVo = new DsrVo();
-        dsrVo.setId(dsr.getDsrid());
+        dsrVo.setId(dsr.getDsrId()==null?null:dsr.getDsrId().toString());
         dsrVo.setCode(dsr.getCode());
         dsrVo.setSsdw(dsr.getSsdw());
 
@@ -239,9 +240,9 @@ public class DsrServiceImpl implements DsrService {
         bhrVo.setId(bhr.getId().toString());
         bhrVo.setCode(bhr.getCode());
         bhrVo.setDsrId(bhr.getDsrId().toString());
-        bhrVo.setDlrmc(bhr.getXm());
-        bhrVo.setYdsrgx(bhr.getYdsrgx());
+        bhrVo.setDlrmc(bhr.getLx());
         bhrVo.setDlrxm(bhr.getXm());
+        bhrVo.setYdsrgx(bhr.getYdsrgx());
         bhrVo.setSsdlrsf(bhr.getSsdlrsf());
         bhrVo.setSfflyz(bhr.getSfflyz());
         bhrVo.setDlrzjlx(bhr.getZjzl());
@@ -260,8 +261,8 @@ public class DsrServiceImpl implements DsrService {
         bhr.setId(StringUtils.isEmpty(b.getId()) ? null : Integer.parseInt(b.getId()));
         bhr.setCode(b.getCode());
         bhr.setDsrId(StringUtils.isEmpty(b.getDsrId()) ? null : Integer.parseInt(b.getDsrId()));
-        bhr.setXm(b.getDlrmc());
         bhr.setXm(b.getDlrxm());
+        bhr.setLx(b.getDlrmc());
         bhr.setYdsrgx(b.getYdsrgx());
         bhr.setSsdlrsf(b.getSsdlrsf());
         bhr.setSfflyz(b.getSfflyz());

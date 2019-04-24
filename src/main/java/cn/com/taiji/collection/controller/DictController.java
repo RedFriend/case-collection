@@ -2,6 +2,8 @@ package cn.com.taiji.collection.controller;
 
 import cn.com.taiji.collection.entity.*;
 import cn.com.taiji.collection.service.DictService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +26,27 @@ public class DictController extends BaseController {
     DictService dictService;
 
     @ApiOperation("案由")
-    @ApiParam(name = "ajlb", value = "案件类别")
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "案件类别", name = "ajlb", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(value = "案件类型", name = "ajlx", dataType = "String", paramType = "query")})
     @GetMapping("/ay")
-    @Cacheable(value = "dict_ay")
-    public List<Ay> findAllAy(String ajlb) {
+    public List<Ay> findAllAy(String ajlb, String ajlx) {
         List<Ay> ayList = dictService.findAllAy();
-        if (!StringUtils.isEmpty(ajlb)) {
-            ayList = ayList.stream().filter(ay -> ay.getAjlbKey().equals(ajlb)).collect(Collectors.toList());
+        if (!StringUtils.isEmpty(ajlb) || !StringUtils.isEmpty(ajlx)) {
+            ayList = ayList.stream().filter(ay -> {
+                if (!StringUtils.isEmpty(ajlx)) {
+                    return ay.getAjlbKey().equals(String.valueOf(Integer.parseInt(ajlx.substring(0, 2))));
+                } else {
+                    return ay.getAjlbKey().equals(ajlb);
+                }
+            }).collect(Collectors.toList());
         }
         List<Ay> ayList2 = dictService.getChirldAy(ayList);
         return ayList2;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Integer.parseInt("10"));
     }
 
     @ApiOperation("案由案件类型")
