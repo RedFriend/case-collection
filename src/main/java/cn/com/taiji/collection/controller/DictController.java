@@ -30,6 +30,7 @@ public class DictController extends BaseController {
             @ApiImplicitParam(value = "案件类别", name = "ajlb", dataType = "String", paramType = "query"),
             @ApiImplicitParam(value = "案件类型", name = "ajlx", dataType = "String", paramType = "query")})
     @GetMapping("/ay")
+    @Cacheable(value = "dict_ay")
     public List<Ay> findAllAy(String ajlb, String ajlx) {
         List<Ay> ayList = dictService.findAllAy();
         if (!StringUtils.isEmpty(ajlb) || !StringUtils.isEmpty(ajlx)) {
@@ -43,10 +44,6 @@ public class DictController extends BaseController {
         }
         List<Ay> ayList2 = dictService.getChirldAy(ayList);
         return ayList2;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(Integer.parseInt("10"));
     }
 
     @ApiOperation("案由案件类型")
@@ -71,12 +68,12 @@ public class DictController extends BaseController {
     }
 
     @ApiOperation(value = "案件信息/收案信息/收案来源 选项", notes = "code 案件类型（不传值或传空值返回所有收案来源）刑事一审 0301")
-    @ApiParam(name = "code", value = "案件类型编码", required = true)
+    @ApiParam(name = "ajlx", value = "案件类型编码", required = true)
     @GetMapping("/saly")
     @Cacheable(value = "dict_saly")
-    public List<Dict> saly(String code) {
+    public List<Dict> saly(String ajlx) {
         String type = "saly";
-        return dictService.getSaly(type, code);
+        return dictService.getSaly(type, ajlx);
     }
 
     @ApiOperation(value = "案件信息/收案信息/管辖依据 选项")
@@ -98,6 +95,14 @@ public class DictController extends BaseController {
         return dictService.getSaly(type, code);
     }
 
+    @ApiOperation(value = "案件信息/收案信息/行政行为种类 选项")
+    @GetMapping("/xzxwzl")
+    @Cacheable(value = "dictXzxwzl")
+    public List<Dict> xzxwzl() {
+        String code = "sp_aj_xzxwzl";
+        String type = "1";
+        return dictService.getSaly(type, code);
+    }
 
     @ApiOperation(value = "案件信息/收案信息/检察院建议适用程序 选项")
     @ApiParam(name = "code", value = "案件类型编码", required = true)

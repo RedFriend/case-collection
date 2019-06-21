@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="cn.com.taiji.collection.util.BaseMapper"/>
+        </plugin>
+        <!-- 数据库的相关配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://146.12.2.229:3306/cs_dzjz_20180608"
+                        userId="root"
+                        password="123.com"/>
+        <!-- 实体类生成的位置 -->
+        <javaModelGenerator targetPackage="cn.com.taiji.collection.entity"
+                            targetProject="..\case-collection\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="rootClass" value="cn.com.taiji.collection.entity.BaseEntity"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- *Mapper.xml 文件的位置 -->
+        <sqlMapGenerator targetPackage="/mapper" targetProject="src\main\resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- Mapper 接口文件的位置 -->
+        <javaClientGenerator targetPackage="cn.com.taiji.collection.mapper" targetProject="src\main\java"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 相关表的配置 domainObjectName 生成的对象名,去掉前缀-->
+        <!--<table tableName="t_ws_field" domainObjectName="WsField" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--enableUpdateByExample="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_ws_object" domainObjectName="WsObject" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--enableUpdateByExample="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_ws_template" domainObjectName="WsTemplate" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--enableUpdateByExample="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_ws_template_type" domainObjectName="WsTemplateType" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--enableUpdateByExample="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_ws_action" domainObjectName="WsAction" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--enableUpdateByExample="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_ws_dict" domainObjectName="WsDict" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+        </table>-->
+        <table tableName="t_jck_bhr" domainObjectName="Bhr" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+        </table>
+        <!--<table tableName="t_ws_mark" domainObjectName="WsMark" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+        </table>-->
+
+    </context>
+</generatorConfiguration>

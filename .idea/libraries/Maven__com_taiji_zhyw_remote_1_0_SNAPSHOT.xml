@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.taiji:zhyw-remote:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://D:/Program Files/apache-maven-3.5.3/repository/com/taiji/zhyw-remote/1.0-SNAPSHOT/zhyw-remote-1.0-20190606.080653-43.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/Program Files/apache-maven-3.5.3/repository/com/taiji/zhyw-remote/1.0-SNAPSHOT/zhyw-remote-1.0-20190606.080653-43-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/Program Files/apache-maven-3.5.3/repository/com/taiji/zhyw-remote/1.0-SNAPSHOT/zhyw-remote-1.0-20190606.080653-43-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
