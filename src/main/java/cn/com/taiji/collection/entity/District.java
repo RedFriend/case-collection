@@ -1,9 +1,11 @@
 package cn.com.taiji.collection.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.List;
 
 @Table(name = "common.t_ggk_china_district")

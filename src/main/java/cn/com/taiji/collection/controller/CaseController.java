@@ -4,6 +4,7 @@ import cn.com.taiji.collection.entity.Ajjbxx;
 import cn.com.taiji.collection.service.CaseService;
 import cn.com.taiji.collection.service.CollectionCaseService;
 import cn.com.taiji.collection.util.RequestReflect;
+import com.alibaba.fastjson.JSONObject;
 import com.taiji.caze.online.remote.vo.data.ElCaseInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,6 +40,7 @@ public class CaseController extends BaseController {
     @PostMapping("/addUpdCase")
     @ResponseBody
     public Map<String, Object> addUpdCase(@RequestBody Ajjbxx ajjbxx) {
+        System.out.println(JSONObject.toJSONString(ajjbxx));
         Map<String, Object> map = new HashMap<>();
         if (StringUtils.isEmpty(ajjbxx.getCbfy())) {
             map.put("code", "false");

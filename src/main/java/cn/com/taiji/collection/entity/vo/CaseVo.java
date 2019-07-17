@@ -195,10 +195,29 @@ public class CaseVo {
     @Column(name = "update_time")
     private Date updateTime;
 
-    @ApiModelProperty(value = "讼请求")
+    @ApiModelProperty(value = "诉讼请求")
     private String ssqq;
 
     @ApiModelProperty(value = "事实与理由")
     private String ssyly;
+
+    @ApiModelProperty(value = "备注")
+    private String bz;
+
+    @ApiModelProperty(value = "是否跨行政区划")
+    private String kxzqh;
+
+    @ApiModelProperty(value = "是否审判流程公开")
+    private String splcgk;
+
+    @ApiModelProperty(value = "起诉案由")
+    private String qsay;
+    @ApiModelProperty(value = "案由具体描述")
+    private String ayjtms;
+    @ApiModelProperty(value = "检察院建议适用程序")
+    private String jcysycx;
+
+
+
 
 }

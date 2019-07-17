@@ -1,9 +1,9 @@
 package cn.com.taiji.collection.service;
 
+import cn.com.taiji.collection.entity.vo.BhrVo;
 import cn.com.taiji.collection.entity.vo.CaseDsrVo;
 import cn.com.taiji.collection.entity.vo.CaseVo;
 import cn.com.taiji.collection.entity.vo.DsrVo;
-import com.alibaba.fastjson.JSON;
 import com.taiji.caze.online.remote.service.CaseService;
 import com.taiji.caze.online.remote.vo.data.*;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,19 +24,162 @@ public class CollectionCaseServiceImpl implements CollectionCaseService {
 
     @Override
     public Map pushCase(CaseDsrVo caseDsrVo) {
-        CaseVo caseVo=caseDsrVo.getCaseVo();
-        List<DsrVo> dsrVos=caseDsrVo.getDsrVos();
+        Map<String, Object> retval = new HashMap<>();
+        ElCaseInfo elCaseInfo = assembleCriminalCase(caseDsrVo);
+        try {
+            //调用dubbo注入的case-online推送至新广东审判系统
+            ResultInfo resultInfo = caseService.collectCase(elCaseInfo);
+            //TODO 案件信息ajid回写
+            retval.put("flg", true);
+            retval.put("msg", "sucess");
+            retval.put("retval", resultInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        log.info("推送结束,返回对象:{}", retval);
+        return retval;
+    }
+
+    /**
+     * 拼凑-刑事案件推送实体类
+     *
+     * @param caseDsrVo
+     * @return
+     */
+    public ElCaseInfo assembleCriminalCase(CaseDsrVo caseDsrVo) {
+
+        CaseVo cas = caseDsrVo.getCaseVo();
+        List<DsrVo> dsrVos = caseDsrVo.getDsrVos();
 
 
         ElCaseInfo elCaseInfo = new ElCaseInfo();
         elCaseInfo.setSourceEnum(com.taiji.caze.online.remote.vo.data.enums.SourceEnum.DZJZ);
         elCaseInfo.setXladr(0);
-        elCaseInfo.setFydm(caseVo.getCbbm());
+        elCaseInfo.setFydm(cas.getCbbm());
 
         List<CaseData> list = new ArrayList<>();
         CaseData caseData = new CaseData();
-        caseData.setAjlb("0300");
-        caseData.setOid("asdfghjkl123");
+        caseData.setAjlb(cas.getAjlb());
+        caseData.setOid(cas.getCode());
+        XsAjxx aj = new XsAjxx();
+        caseData.setAjxx(aj);
+
+        aj.setAjlx(cas.getAjlx());
+        aj.setSaly(cas.getAjly());
+        aj.setLaay(cas.getLaay());
+        aj.setAyzs(null);
+        aj.setAjmc(null);
+        //TODO 收案日期  收案登记人
+        //TODO 承办部门
+        //适用程序
+        aj.setFjxx_sycx(cas.getSycx());
+        //TODO 适用审限
+        //公诉机关
+        aj.setGsjg(cas.getGsjg());
+        //公诉人
+        aj.setGsr(cas.getGsr1());
+        //公诉书编号
+        aj.setGssbh(cas.getGssbh());
+        //TODO 扫黑除恶案件确认
+        //管辖依据
+        aj.setGxyj(cas.getLagxyj());
+        //是否跨行政区划
+        aj.setSfkxzqh(cas.getKxzqh());
+        //是否审判流程公开
+        aj.setSfkxzqh(cas.getSplcgk());
+        //诉讼请求
+        aj.setSsqq(cas.getSsqq());
+        //事实与理由
+        aj.setSsyly(cas.getSsyly());
+        //备注
+        aj.setBz(cas.getBz());
+        //立案案由
+        aj.setLaay(cas.getLaay());
+        //案由具体描述
+        aj.setAyzs(cas.getAyjtms());
+        //检察院建议适用程序
+        aj.setFjxx_jcyjysycx(cas.getJcysycx());
+
+        //当事人信息
+        List<Dsr> dsrs = new ArrayList<>();
+        caseData.setDsrList(dsrs);
+        for (DsrVo dsrVo : dsrVos) {
+            dsrs.add(converterDsrVo2Dsr(dsrVo));
+        }
+        //TODO 证据材料
+        //TODO 原审案件
+        return null;
+    }
+
+    public Dsr converterDsrVo2Dsr(DsrVo dsrVo) {
+        Dsr dsr = new Dsr();
+        //当事人类型 必填
+        dsr.setDssarfl(dsrVo.getLx());
+        //TODO 当事人及主要涉案人类型 必填
+        dsr.setDssarlx(dsrVo.getLx());
+        //本案案件地位 必填
+        dsr.setBaajdw(dsrVo.getSsdw());
+        //姓名，自然人必填
+        dsr.setZrrxm(dsrVo.getXm());
+        //单位名称【公用】，非自然人必填
+        dsr.setDwmc(dsrVo.getDwmc());
+
+        //代理人
+        List<BhrVo> bhrVos = dsrVo.getBhrVos();
+        List<Dsr.Dlr> dlrList = new ArrayList<>();
+        for (BhrVo bhrVo : bhrVos) {
+            Dsr.Dlr dlr = new Dsr.Dlr();
+            dlr.setDlrlx(null);
+            dlr.setDlrmc(bhrVo.getDlrmc());
+            dlr.setDwmc(bhrVo.getDlrmc());
+
+            dlrList.add(dlr);
+        }
+
+        return dsr;
+    }
+
+    public ElCaseInfo assembleCivilCase(CaseDsrVo caseDsrVo) {
+
+        CaseVo cas = caseDsrVo.getCaseVo();
+        List<DsrVo> dsrVos = caseDsrVo.getDsrVos();
+
+
+        ElCaseInfo elCaseInfo = new ElCaseInfo();
+        elCaseInfo.setSourceEnum(com.taiji.caze.online.remote.vo.data.enums.SourceEnum.DZJZ);
+        elCaseInfo.setXladr(0);
+        elCaseInfo.setFydm(cas.getCbbm());
+
+        List<CaseData> list = new ArrayList<>();
+        CaseData caseData = new CaseData();
+        caseData.setAjlb(cas.getAjlb());
+        caseData.setOid(cas.getCode());
+
+        XsAjxx xsAjxx = new XsAjxx();
+        xsAjxx.setAjlx(cas.getAjlx());
+        xsAjxx.setSaly(cas.getAjly());
+        xsAjxx.setLaay(cas.getLaay());
+        xsAjxx.setAyzs(null);
+        xsAjxx.setAjmc(null);
+        xsAjxx.setAjmc(null);
+        xsAjxx.setAjsjlx(null);
+        xsAjxx.setSjqtmc(null);
+        xsAjxx.setSqwx(null);
+        xsAjxx.setSgatqx(null);
+        xsAjxx.setGsjg(null);
+        xsAjxx.setZslx(null);
+        xsAjxx.setGxyj(cas.getLagxyj());
+//        0201	刑事一审案件	1	检察院公诉
+//        0201	刑事一审案件	2	当事人自诉
+//        0201	刑事一审案件	3	上级法院发回重审
+//        0201	刑事一审案件	4	上级法院指定管辖
+//        0201	刑事一审案件	5	上级法院指定重新审判
+//        0201	刑事一审案件	6	其他法院移送管辖
+//        0201	刑事一审案件	7	本院提级管辖
+//        0201	刑事一审案件	8	上级法院指令受理
+//        0201	刑事一审案件	9	上级法院指令审理
+        xsAjxx.setLaay(cas.getLaay());
+
         MsAjxx msAjxx = new MsAjxx();
         msAjxx.setAjlx("0301");
         msAjxx.setAjsjlx("255");
@@ -151,11 +295,12 @@ public class CollectionCaseServiceImpl implements CollectionCaseService {
 //        ResultInfo resultInfo = caseService.collectCase(elCaseInfo);
 //        System.out.println(JSON.toJSON(resultInfo));
         log.info("修改完毕");
-
-
-
-
-
         return null;
+
+    }
+
+    public ElCaseInfo assembleAdministrativeCase(CaseDsrVo caseDsrVo) {
+        return null;
+
     }
 }
